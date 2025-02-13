@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="b08e09c" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:collaboration id="Request_Annual_Leave_Employee">
+    <bpmn:extensionElements />
+    <bpmn:participant id="Participant_0u5ou0d" name="Request Annual Leave" processRef="RequestAnnualLeaveProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="RequestAnnualLeaveProcess" name="Request Annual Leave" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0cbwywo" />
+    <bpmn:sequenceFlow id="Flow_0zu4qcu" sourceRef="StartEvent_1" targetRef="Activity_0fiqblb" />
+    <bpmn:sequenceFlow id="Flow_1dq787z" sourceRef="AnnualLeaveRequested" targetRef="EndEvent_AnnualLeaveApproved" />
+    <bpmn:sequenceFlow id="Flow_0wxvzdh" sourceRef="RequestedAnuualLeave" targetRef="AnnualLeaveRequested" />
+    <bpmn:sequenceFlow id="Flow_00z7fsk" sourceRef="Event_00cvxp8" targetRef="Event_0aeijzz" />
+    <bpmn:sequenceFlow id="Flow_1vcbxbn" sourceRef="Activity_0fiqblb" targetRef="Event_1ldlxxr" />
+    <bpmn:sequenceFlow id="Flow_13bvrzq" sourceRef="Event_1ldlxxr" targetRef="RequestedAnuualLeave" />
+    <bpmn:endEvent id="EndEvent_AnnualLeaveApproved" name="Annual Leave Approved">
+      <bpmn:incoming>Flow_1dq787z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0aeijzz">
+      <bpmn:incoming>Flow_00z7fsk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:callActivity id="RequestedAnuualLeave" name="Request Annual  Leave">
+      <bpmn:extensionElements>
+        <zeebe:calledElement processId="Process7" propagateAllChildVariables="false" bindingType="deployment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_13bvrzq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wxvzdh</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:task id="Activity_0fiqblb" name="Wait for 1 hour">
+      <bpmn:incoming>Flow_0zu4qcu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vcbxbn</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="Event_00cvxp8" name="Wait for 1 hourr" attachedToRef="Activity_0fiqblb">
+      <bpmn:outgoing>Flow_00z7fsk</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0fkjnwa">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT2H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0zu4qcu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="Event_1ldlxxr">
+      <bpmn:incoming>Flow_1vcbxbn</bpmn:incoming>
+      <bpmn:outgoing>Flow_13bvrzq</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0v34vum">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT2H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="AnnualLeaveRequested" name="Annual Leave Requested">
+      <bpmn:incoming>Flow_0wxvzdh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dq787z</bpmn:outgoing>
+      <bpmn:outgoing>Flow_02bcnq7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateThrowEvent id="Event_081min2">
+      <bpmn:incoming>Flow_02bcnq7</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_02bcnq7" sourceRef="AnnualLeaveRequested" targetRef="Event_081min2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Request_Annual_Leave_Employee">
+      <bpmndi:BPMNShape id="Participant_0u5ou0d_di" bpmnElement="Participant_0u5ou0d" isHorizontal="true">
+        <dc:Bounds x="99" y="40" width="941" height="290" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0n6u4f6_di" bpmnElement="EndEvent_AnnualLeaveApproved">
+        <dc:Bounds x="832" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="817" y="143" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0aeijzz_di" bpmnElement="Event_0aeijzz">
+        <dc:Bounds x="412" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p3uyg7_di" bpmnElement="RequestedAnuualLeave">
+        <dc:Bounds x="520" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fiqblb_di" bpmnElement="Activity_0fiqblb">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17ljvff_di" bpmnElement="Event_1ldlxxr">
+        <dc:Bounds x="412" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pky2bb_di" bpmnElement="AnnualLeaveRequested" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
+        <dc:Bounds x="650" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14zesg5_di" bpmnElement="Event_081min2">
+        <dc:Bounds x="682" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19ac8v0_di" bpmnElement="Event_00cvxp8">
+        <dc:Bounds x="272" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="253" y="185" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0zu4qcu_di" bpmnElement="Flow_0zu4qcu">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="213" y="118" />
+        <di:waypoint x="213" y="120" />
+        <di:waypoint x="240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dq787z_di" bpmnElement="Flow_1dq787z">
+        <di:waypoint x="750" y="118" />
+        <di:waypoint x="832" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wxvzdh_di" bpmnElement="Flow_0wxvzdh">
+        <di:waypoint x="620" y="118" />
+        <di:waypoint x="650" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00z7fsk_di" bpmnElement="Flow_00z7fsk">
+        <di:waypoint x="290" y="178" />
+        <di:waypoint x="290" y="230" />
+        <di:waypoint x="412" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vcbxbn_di" bpmnElement="Flow_1vcbxbn">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="376" y="120" />
+        <di:waypoint x="376" y="130" />
+        <di:waypoint x="412" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13bvrzq_di" bpmnElement="Flow_13bvrzq">
+        <di:waypoint x="448" y="132" />
+        <di:waypoint x="484" y="132" />
+        <di:waypoint x="484" y="120" />
+        <di:waypoint x="520" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02bcnq7_di" bpmnElement="Flow_02bcnq7">
+        <di:waypoint x="700" y="158" />
+        <di:waypoint x="700" y="212" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

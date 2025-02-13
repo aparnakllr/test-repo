@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="b08e09c" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="Process7" name="CallActivity_9" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:properties>
+        <zeebe:property />
+      </zeebe:properties>
+    </bpmn:extensionElements>
+    <bpmn:task id="Check_available_Days" name="Check_available_Days2">
+      <bpmn:incoming>Flow_005pqzc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vmx04v</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1bakiv2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End" name="End">
+      <bpmn:incoming>Flow_0vmx04v</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Fill_the_Form" name="Fill the Form4">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_14qm1us</bpmn:incoming>
+      <bpmn:outgoing>Flow_005pqzc</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_005pqzc" sourceRef="Fill_the_Form" targetRef="Check_available_Days" />
+    <bpmn:sequenceFlow id="Flow_0vmx04v" sourceRef="Check_available_Days" targetRef="End" />
+    <bpmn:sequenceFlow id="Flow_14qm1us" sourceRef="StartEntername" targetRef="Fill_the_Form" />
+    <bpmn:startEvent id="StartEntername" name="Start_EnterName">
+      <bpmn:outgoing>Flow_14qm1us</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_1xmm8tu">
+      <bpmn:incoming>Flow_1bakiv2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jofpzj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1bakiv2" sourceRef="Check_available_Days" targetRef="Gateway_1xmm8tu" />
+    <bpmn:task id="Activity_0pws2fu" name="Just change activity name">
+      <bpmn:incoming>Flow_1jofpzj</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1jofpzj" sourceRef="Gateway_1xmm8tu" targetRef="Activity_0pws2fu" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process7">
+      <bpmndi:BPMNShape id="Activity_1p1sf71_di" bpmnElement="Check_available_Days">
+        <dc:Bounds x="400" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0kqck2v_di" bpmnElement="End">
+        <dc:Bounds x="612" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="620" y="143" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1frzgpj_di" bpmnElement="Fill_the_Form">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEntername">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="126" y="143" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1xmm8tu_di" bpmnElement="Gateway_1xmm8tu" isMarkerVisible="true">
+        <dc:Bounds x="425" y="225" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pws2fu_di" bpmnElement="Activity_0pws2fu">
+        <dc:Bounds x="530" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_005pqzc_di" bpmnElement="Flow_005pqzc">
+        <di:waypoint x="340" y="118" />
+        <di:waypoint x="400" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vmx04v_di" bpmnElement="Flow_0vmx04v">
+        <di:waypoint x="500" y="118" />
+        <di:waypoint x="612" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14qm1us_di" bpmnElement="Flow_14qm1us">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="240" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bakiv2_di" bpmnElement="Flow_1bakiv2">
+        <di:waypoint x="450" y="158" />
+        <di:waypoint x="450" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jofpzj_di" bpmnElement="Flow_1jofpzj">
+        <di:waypoint x="475" y="250" />
+        <di:waypoint x="530" y="250" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
